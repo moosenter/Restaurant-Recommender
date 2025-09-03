@@ -1,0 +1,57 @@
+version: "3.9"
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: recommender_redis
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
+    environment:
+      - APPCONF=conf/app.yaml
+      - REDIS_HOST=redis 
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  loader:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: recommender_loader:latest
+    container_name: recommender_loader
+    environment:
+      - APPCONF=conf/app.yaml
+    depends_on:
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./data:/app/data
+      - ./conf:/app/conf:ro
+    entrypoint: ["python", "loader_redis.py"]
+    profiles: ["tools"]
+
+  api:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: recommender-api:latest
+    container_name: recommender_api
+    environment:
+      - APPCONF=conf/app.yaml
+    depends_on:
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./data:/app/data
+      - ./conf:/app/conf:ro
+    ports:
+      - "8123:8123"
+    command: uvicorn 04_inference:app --host 0.0.0.0 --port 8123
+
+volumes:
+  redis-data:

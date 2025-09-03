@@ -1,0 +1,13 @@
+,0
+n_train_files,80.0
+n_test_files,8.0
+train_rows,50000000.0
+train_clicks,23095119.0
+train_click_rate,0.46190238
+test_rows,5000000.0
+test_clicks,2311792.0
+test_click_rate,0.4623584
+unique_users_train,1000000.0
+unique_restaurants_train,100000.0
+unique_users_test,993201.0
+unique_restaurants_test,100000.0

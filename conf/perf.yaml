@@ -1,0 +1,12 @@
+api_base: http://127.0.0.1:8123
+endpoint: /recommend/{uid}
+rps: 30
+duration_sec: 60
+
+data_dir: data
+requests_file: ${data_dir}/requests.parquet
+candidate_size: 50
+top_k: 20
+max_dist: 5000
+sort_dist: false
+threads: 8

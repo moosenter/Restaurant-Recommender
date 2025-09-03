@@ -1,0 +1,13 @@
+data_dir: data
+train_glob: ${data_dir}/train/train_*.parquet
+user_features: ${data_dir}/user_features.parquet
+restaurant_features: ${data_dir}/restaurant_features.parquet
+model_path: ${data_dir}/model.pt
+scaler_path: ${data_dir}/scaler.npz
+
+batch_size: 128         # mini-batch size
+epochs: 5               # number of epochs
+lr: 1e-3                # learning rate
+max_epoch_sec: 45       # time budget per epoch (seconds)
+cpu_threads: 4          # torch.set_num_threads limit
+shuffle_files: true     # shuffle order of parquet shards each epoch

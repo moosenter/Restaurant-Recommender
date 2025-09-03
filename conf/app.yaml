@@ -1,0 +1,23 @@
+data_dir: data
+paths:
+  user_features: ${data_dir}/user_features.parquet
+  restaurant_features: ${data_dir}/restaurant_features.parquet
+  model_path: ${data_dir}/model.pt
+  scaler_path: ${data_dir}/scaler.npz
+  db_path: ${data_dir}/features.db
+
+api:
+  host: 0.0.0.0
+  port: 8123
+  log_level: info
+
+db:
+  type: redis
+  redis:
+    host: redis
+    port: 6379
+    db: 0
+    prefix_users: "u:"
+    prefix_restaurants: "r:"
+    preload: true        # load all features on startup or via loader script
+    batch: 20000         # batch size when preloading
