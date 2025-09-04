@@ -1,0 +1,1 @@
+curl -s -X POST http://localhost:8123/recommend/982159 -H "Content-Type: application/json" -d '{"candidate_restaurant_ids": [42457, 11352], "latitude": 13.7563, "longitude": 100.5018, "size": 20, "max_dist": 5000, "sort_dist": false}'

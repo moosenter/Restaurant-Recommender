@@ -41,7 +41,6 @@ class ClickIterable(IterableDataset):
             rng.shuffle(files)
         for f in files:
             df = pd.read_parquet(f, columns=["user_id", "restaurant_id", "click"])
-            # light shuffle per-file to reduce ordering bias
             df = df.sample(frac=1.0, random_state=13).reset_index(drop=True)
 
             u = df["user_id"].to_numpy()

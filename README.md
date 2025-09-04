@@ -1,8 +1,22 @@
-# Recommender (MLE Assignment 2025)
+# Resturant Recommender
 
 Beginner-friendly steps to **generate data**, **train**, **evaluate**, and **serve** a restaurant recommender.
 
 > Tested on Python 3.11, CPU-only. Works within **4 vCPU / 4GiB RAM** constraints when using default generator settings.
+
+## Quick starts:
+> This only works when `/data` dir exists in `data` must have the following files:
+>
+> model.pt, scaler.npz, user_features.parquet, restaurant_features.parquet, and docker are required priorly
+```bash
+chmod +x ./start_services.sh ./prepare.sh ./injection.sh
+# First Terminal
+./start_services.sh
+# Second Terminal
+./prepare.sh
+# Third Terminal
+./injection.sh
+```
 
 ## 1) Setup
 
@@ -11,7 +25,7 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-# Quick start
+# How to
 
 ## 1. Generate data:
 ```python
